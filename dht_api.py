@@ -17,7 +17,10 @@ api = Api(app)
 
 class Temperature(Resource):
     def get(self, temperature_unit):
-        temperature, humidity = get_temp()
+        temperature, humidity = Adafruit_DHT.read_retry(
+            config["sensor"],
+            config["pin"]
+        )
 
         if temperature_unit == "farenheit":
             temperature = temperature * 9/5.0 + 32
@@ -56,10 +59,3 @@ if __name__ == "__main__":
         exit()
 
     app.run(host=config["address"], port=config["port"])
-
-
-def get_temp(sensor, pin):
-    temperature, humidity = Adafruit_DHT.read_retry(sensor, pin)
-
-    return temperature, humidity
-
