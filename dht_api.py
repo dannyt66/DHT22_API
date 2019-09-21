@@ -31,7 +31,38 @@ class Temperature(Resource):
         }
 
 
+class Humidity(Resource):
+    def get(self):
+        humidity, temperature = Adafruit_DHT.read_retry(
+            config["sensor"],
+            config["pin"]
+        )
+
+        return {
+            'humidity': humidity
+        }
+
+
+class Both(Resource):
+    def get(self, temperature_unit):
+        humidity, temperature = Adafruit_DHT.read_retry(
+            config["sensor"],
+            config["pin"]
+        )
+
+        if temperature_unit == "farenheit":
+            temperature = temperature * 9/5.0 + 32
+
+        return {
+            'temperature': temperature,
+            'temperature_unit': temperature_unit,
+            'humidity': humidity
+        }
+
+
 api.add_resource(Temperature, "/temperature/<temperature_unit>")
+api.add_resource(Humidity, "/humidity")
+api.add_resource(Both, "/atmosphere/<temperature_unit>")
 
 if __name__ == "__main__":
     sensor_args = {
