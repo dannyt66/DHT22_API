@@ -1,4 +1,5 @@
 {
     "sensor": "DHT22",
-    "pin": 4
+    "pin": 4,
+    "port": 80
 }
