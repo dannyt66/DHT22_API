@@ -41,7 +41,7 @@ if __name__ == "__main__":
     }
 
     if config["sensor"] is not None:
-        config["sensor"] == sensor_args[config["sensor"]]
+        config["sensor"] = sensor_args[config["sensor"]]
     else:
         print("You must supply a sensor configuration. Exiting.")
         exit()
