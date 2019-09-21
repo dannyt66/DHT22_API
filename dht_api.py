@@ -47,11 +47,15 @@ if __name__ == "__main__":
         print("You must specify the pin your sensor is attacted to. Exiting.")
         exit()
 
+    if config["address"] is None:
+        print("You must supply an address to bind to. Exiting.")
+        exit()
+
     if config["port"] is None:
         print("You must supply a port to listen on. Exiting.")
         exit()
 
-    app.run(port=config["port"])
+    app.run(host=config["address"], port=config["port"])
 
 
 def get_temp(sensor, pin):
