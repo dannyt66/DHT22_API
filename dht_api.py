@@ -17,7 +17,7 @@ api = Api(app)
 
 class Temperature(Resource):
     def get(self, temperature_unit):
-        temperature, humidity = Adafruit_DHT.read_retry(
+        humidity, temperature = Adafruit_DHT.read_retry(
             config["sensor"],
             config["pin"]
         )
