@@ -1,5 +1,5 @@
 # API stuff
-from flask import Flask
+from flask import Flask, abort
 from flask_restful import Resource, Api
 import json
 
@@ -22,8 +22,14 @@ class Temperature(Resource):
             config["pin"]
         )
 
-        if temperature_unit == "farenheit":
+        if temperature_unit == "celsius":
+            pass
+        elif temperature_unit == "farenheit":
             temperature = temperature * 9/5.0 + 32
+        elif temperature_unit == "kelvin":
+            temperature = temperature + 273.15
+        else:
+            abort(404)
 
         return {
             'temperature': temperature,
@@ -50,8 +56,14 @@ class Both(Resource):
             config["pin"]
         )
 
-        if temperature_unit == "farenheit":
+        if temperature_unit == "celsius":
+            pass
+        elif temperature_unit == "farenheit":
             temperature = temperature * 9/5.0 + 32
+        elif temperature_unit == "kelvin":
+            temperature = temperature + 273.15
+        else:
+            abort(404)
 
         return {
             'temperature': temperature,
