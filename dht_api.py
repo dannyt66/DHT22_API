@@ -32,7 +32,7 @@ class Temperature(Resource):
             abort(404)
 
         return {
-            'temperature': temperature,
+            'temperature': round(temperature, 2),
             'unit': temperature_unit
         }
 
@@ -45,7 +45,7 @@ class Humidity(Resource):
         )
 
         return {
-            'humidity': humidity
+            'humidity': round(humidity, 2)
         }
 
 
@@ -66,9 +66,9 @@ class Both(Resource):
             abort(404)
 
         return {
-            'temperature': temperature,
+            'temperature': round(temperature, 2),
             'temperature_unit': temperature_unit,
-            'humidity': humidity
+            'humidity': round(humidity, 2)
         }
 
 
@@ -101,4 +101,4 @@ if __name__ == "__main__":
         print("You must supply a port to listen on. Exiting.")
         exit()
 
-    app.run(host=config["address"], port=config["port"])
+    app.run(host=config["address"], port=config["port"], threaded=True)
