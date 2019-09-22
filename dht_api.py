@@ -101,4 +101,4 @@ if __name__ == "__main__":
         print("You must supply a port to listen on. Exiting.")
         exit()
 
-    app.run(host=config["address"], port=config["port"])
+    app.run(host=config["address"], port=config["port"], threaded=True)
